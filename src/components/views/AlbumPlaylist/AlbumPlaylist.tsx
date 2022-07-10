@@ -1,16 +1,23 @@
-import styles from "./AlbumPlaylist.module.css";
+import styles from "../Artist/Artist.module.css";
 import SearchBar from "../../commons/SearchBar/SearchBar";
 import SideBar from "../../commons/SideBar/SideBar";
 import ContentAlbumPlaylist from "../../commons/ContentAlbumPlaylist/ContentAlbumPlaylist";
-import Player from "../../commons/Player/Player";
+import { useSelector } from "react-redux";
+import SearchResults from "../SearchResults/SearchResults";
 
 const AlbumPlaylist = () => {
+  const searchString = useSelector((state: any) => state.query)
+  
   return (
     <div className={styles.container}>
       <SearchBar/>
       <SideBar/>
-      <ContentAlbumPlaylist/>
-      <Player />
+      {
+        !searchString ?
+          <ContentAlbumPlaylist/>
+          :
+          <SearchResults />
+      }
     </div>
   );
 };
